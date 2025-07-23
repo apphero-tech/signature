@@ -1,0 +1,8 @@
+# Ignore local config and temp files
+.sfdx/
+orgs/
+.DS_Store
+
+**/jsconfig.json
+
+**/.eslintrc.json

@@ -1,0 +1,28 @@
+# Ignore Node.js dependencies
+node_modules/
+
+# Ignore test output
+test-results/
+*.log
+
+# Ignore old Git folders accidentally copied inside submodules
+**/.git
+
+# Ignore temporary files
+*.tmp
+*.swp
+.DS_Store
+Thumbs.db
+
+# Ignore scratch org state
+orgs/
+.sfdx/
+.sf/
+
+# VSCode and editor settings
+.vscode/
+.settings/
+
+# Salesforce local config
+.env
+.env.*

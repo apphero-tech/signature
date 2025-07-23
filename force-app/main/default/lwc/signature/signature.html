@@ -1,0 +1,43 @@
+<template>
+    <div class="signature-main-container slds-p-around_medium" style="max-width:400px;width:100%;margin:0 auto;">
+        <div class="signature-title">Draw your signature below</div>
+        <canvas
+            class="signature-canvas"
+            lwc:dom="manual"
+            onmousedown={handleMouseDown}
+            onmousemove={handleMouseMove}
+            onmouseup={handleMouseUp}
+            onmouseleave={handleMouseUp}
+            ontouchstart={handleTouchStart}
+            ontouchmove={handleTouchMove}
+            ontouchend={handleTouchEnd}
+            style="width:100%;max-width:350px;height:150px;display:block;margin:0 auto;"
+            width="350"
+            height="150"
+        ></canvas>
+        <div class="signature-buttons slds-m-top_small" style="display:flex;justify-content:flex-end;gap:0.5rem;">
+            <button class="signature-btn secondary" onclick={handleClear}>Clear</button>
+            <button class="signature-btn" onclick={handleSave} disabled={isSaveDisabled}>Save</button>
+        </div>
+        <template if:true={lastSignature}>
+            <div class="slds-card" style="margin:1.5em auto 0 auto;max-width:350px;width:100%;border-radius:1.2rem;background:#fff;overflow:hidden;box-shadow:0 1px 4px 0 #e5e5e5;">
+                <div class="slds-card__body slds-card__body_inner" style="border-radius:1.2rem;">
+                    <div class="slds-media">
+                        <div class="slds-media__figure">
+                            <img src={lastSignature.image} alt="Dernière signature enregistrée" style="max-width:80px;max-height:40px;border:none;border-radius:0.7rem;background:#fff;" />
+                        </div>
+                        <div class="slds-media__body" style="padding-left:1em;">
+                            <div style="font-size:0.95em;color:#444;">
+                                <lightning-formatted-date-time value={lastSignature.date} year="numeric" month="long" day="2-digit" hour="2-digit" minute="2-digit" second="2-digit"></lightning-formatted-date-time>
+                                <template if:true={lastSignature.name}>
+                                    &nbsp;par {lastSignature.name}
+                                </template>
+                            </div>
+                            <div style="font-size:0.85em;color:#888;">Dernière signature enregistrée</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>

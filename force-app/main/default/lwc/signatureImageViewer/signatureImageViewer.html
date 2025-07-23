@@ -1,0 +1,16 @@
+<template>
+    <template if:true={signatureImage}>
+        <img src={signatureImage} alt="Signature" style="max-width:100%;border:1px solid #ccc;padding:8px;border-radius:6px;" />
+        <div style="margin-top:0.5em;color:#666;font-size:0.95em;">
+            <template if:true={createdDate}>
+                Signed on: <lightning-formatted-date-time value={createdDate} year="numeric" month="long" day="2-digit" hour="2-digit" minute="2-digit" second="2-digit"></lightning-formatted-date-time>
+                <template if:true={createdByName}>
+                    &nbsp;by {createdByName}
+                </template>
+            </template>
+        </div>
+    </template>
+    <template if:false={signatureImage}>
+        <p>No signature image found.</p>
+    </template>
+</template> 
