@@ -11,6 +11,7 @@
     </targets>
     <targetConfigs>
         <targetConfig targets="lightning__FlowScreen">
+            <property name="recordId" type="String" label="ID de l'enregistrement cible" />
             <property
                 name="signatureValue"
                 type="String"
