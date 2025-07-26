@@ -15,6 +15,8 @@ export default class Signature extends LightningElement {
     strokeStarted = false;
 
     @api recordId; // Pour charger la signature existante
+    @api parentRecordId; // ex: {!varInteractionId}
+    @api relatedFieldName; // ex: "Interaction__c"
     @track lastSignature = null; // { image, date, name }
 
     @wire(getRecord, { recordId: '$recordId', fields: [SIGNATURE_IMAGE_FIELD, CREATED_DATE_FIELD, CREATED_BY_NAME_FIELD] })
@@ -123,7 +125,11 @@ export default class Signature extends LightningElement {
     async handleSave() {
         this.signatureValue = this.canvas.toDataURL('image/png');
         try {
-            const recordId = await saveSignature({ base64Image: this.signatureValue });
+            const recordId = await saveSignature({
+                base64Image: this.signatureValue,
+                relatedFieldName: this.relatedFieldName,
+                parentRecordId: this.parentRecordId
+            });
             // Met à jour l'aperçu localement (en attendant le wire refresh)
             this.lastSignature = {
                 image: this.signatureValue,
