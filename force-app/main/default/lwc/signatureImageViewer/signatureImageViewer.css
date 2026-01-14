@@ -1,0 +1,15 @@
+:host {
+    display: block;
+}
+
+.slds-card {
+    background: var(--lwc-colorBackground, #f3f6f9);
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}

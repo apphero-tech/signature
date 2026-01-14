@@ -1,12 +1,35 @@
 import { LightningElement, api, track, wire } from 'lwc';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import saveSignature from '@salesforce/apex/SignatureController.saveSignature';
 import { getRecord } from 'lightning/uiRecordApi';
+
+// Custom Labels for i18n
+import labelDrawSignature from '@salesforce/label/c.Sig_DrawYourSignature';
+import labelClear from '@salesforce/label/c.Sig_Clear';
+import labelSave from '@salesforce/label/c.Sig_Save';
+import labelLastSignature from '@salesforce/label/c.Sig_LastSignature';
+import labelSignedBy from '@salesforce/label/c.Sig_SignedBy';
+import labelSaveSuccess from '@salesforce/label/c.Sig_SaveSuccess';
+import labelSaveError from '@salesforce/label/c.Sig_SaveError';
+import labelSignatureImageAlt from '@salesforce/label/c.Sig_SignatureImageAlt';
 
 const SIGNATURE_IMAGE_FIELD = 'Signature__c.SignatureImage__c';
 const CREATED_DATE_FIELD = 'Signature__c.CreatedDate';
 const CREATED_BY_NAME_FIELD = 'Signature__c.CreatedBy.Name';
 
 export default class Signature extends LightningElement {
+    // Expose labels to template
+    labels = {
+        drawSignature: labelDrawSignature,
+        clear: labelClear,
+        save: labelSave,
+        lastSignature: labelLastSignature,
+        signedBy: labelSignedBy,
+        saveSuccess: labelSaveSuccess,
+        saveError: labelSaveError,
+        signatureImageAlt: labelSignatureImageAlt
+    };
+
     canvas;
     context;
     isDrawing = false;
@@ -134,16 +157,26 @@ export default class Signature extends LightningElement {
             this.lastSignature = {
                 image: this.signatureValue,
                 date: new Date().toISOString(),
-                name: 'Vous'
+                name: 'You'
             };
             this.dispatchEvent(new CustomEvent('signature', {
                 detail: { dataUrl: this.signatureValue, recordId }
             }));
-            alert('Signature saved to Salesforce!');
+            // Show success toast
+            this.dispatchEvent(new ShowToastEvent({
+                title: 'Success',
+                message: this.labels.saveSuccess,
+                variant: 'success'
+            }));
             // Efface le canvas après sauvegarde
             this.clearCanvas();
         } catch (error) {
-            alert('Error saving signature: ' + (error.body && error.body.message ? error.body.message : error.message));
+            // Show error toast
+            this.dispatchEvent(new ShowToastEvent({
+                title: 'Error',
+                message: this.labels.saveError + ' ' + (error.body && error.body.message ? error.body.message : error.message),
+                variant: 'error'
+            }));
         }
     }
 

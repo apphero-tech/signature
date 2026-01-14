@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <!-- Signature Component Labels -->
+    <labels>
+        <fullName>Sig_DrawYourSignature</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Draw Your Signature</shortDescription>
+        <value>Draw your signature below</value>
+        <categories>Signature</categories>
+    </labels>
+    <labels>
+        <fullName>Sig_Clear</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Clear Button</shortDescription>
+        <value>Clear</value>
+        <categories>Signature</categories>
+    </labels>
+    <labels>
+        <fullName>Sig_Save</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Save Button</shortDescription>
+        <value>Save</value>
+        <categories>Signature</categories>
+    </labels>
+    <labels>
+        <fullName>Sig_LastSignature</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Last Signature Saved</shortDescription>
+        <value>Last signature saved</value>
+        <categories>Signature</categories>
+    </labels>
+    <labels>
+        <fullName>Sig_SignedBy</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Signed By</shortDescription>
+        <value>by</value>
+        <categories>Signature</categories>
+    </labels>
+    <labels>
+        <fullName>Sig_SaveSuccess</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Save Success Message</shortDescription>
+        <value>Signature saved successfully!</value>
+        <categories>Signature</categories>
+    </labels>
+    <labels>
+        <fullName>Sig_SaveError</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Save Error Message</shortDescription>
+        <value>Error saving signature:</value>
+        <categories>Signature</categories>
+    </labels>
+    <labels>
+        <fullName>Sig_SignatureImageAlt</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Signature Image Alt Text</shortDescription>
+        <value>Saved signature image</value>
+        <categories>Signature</categories>
+    </labels>
+</CustomLabels>

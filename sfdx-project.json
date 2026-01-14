@@ -3,13 +3,17 @@
     {
       "path": "force-app",
       "default": true,
-      "package": "SigDev",
-      "versionName": "ver 0.1",
-      "versionNumber": "0.1.0.NEXT",
-      "versionDescription": "Composant de signature manuscrite pour Screen Flow Salesforce"
+      "package": "Signature Capture",
+      "versionName": "Spring '26",
+      "versionNumber": "1.0.0.NEXT",
+      "versionDescription": "Electronic signature capture component for Salesforce Lightning. Supports Screen Flows, Record Pages, App Pages, Home Pages, and Experience Cloud."
     }
   ],
-  "namespace": "aph",
+  "namespace": "",
   "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "63.0"
+  "sourceApiVersion": "63.0",
+  "packageAliases": {
+    "Signature Capture": "0HoON00000000eL0AQ",
+    "Signature Capture@1.0.0-1": "04tON000000IYuTYAW"
+  }
 }

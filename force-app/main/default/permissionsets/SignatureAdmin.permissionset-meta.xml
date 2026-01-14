@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Signature Admin</label>
+    <description>Full administrative access to the Signature component and all signature records. Assign to administrators who need to manage and delete signatures.</description>
+    <license>Salesforce</license>
+    <hasActivationRequired>false</hasActivationRequired>
+    
+    <!-- Object Permissions for Signature__c - Full Access -->
+    <objectPermissions>
+        <object>Signature__c</object>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+    
+    <!-- Field Permissions for Signature__c -->
+    <fieldPermissions>
+        <field>Signature__c.SignatureImage__c</field>
+        <editable>true</editable>
+        <readable>true</readable>
+    </fieldPermissions>
+    
+    <!-- Apex Class Access -->
+    <classAccesses>
+        <apexClass>SignatureController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+</PermissionSet>

@@ -1,16 +1,24 @@
 <template>
-    <template if:true={signatureImage}>
-        <img src={signatureImage} alt="Signature" style="max-width:100%;border:1px solid #ccc;padding:8px;border-radius:6px;" />
-        <div style="margin-top:0.5em;color:#666;font-size:0.95em;">
-            <template if:true={createdDate}>
-                Signed on: <lightning-formatted-date-time value={createdDate} year="numeric" month="long" day="2-digit" hour="2-digit" minute="2-digit" second="2-digit"></lightning-formatted-date-time>
-                <template if:true={createdByName}>
-                    &nbsp;by {createdByName}
-                </template>
-            </template>
+    <template if:true={hasSignature}>
+        <div class="slds-card">
+            <div class="slds-card__body slds-card__body_inner">
+                <img src={signatureImage} alt={labels.signatureImageAlt} style="max-width:100%;border:1px solid #ccc;padding:8px;border-radius:6px;background:#fff;" />
+                <div style="margin-top:0.5em;color:#666;font-size:0.95em;">
+                    <template if:true={createdDate}>
+                        <lightning-formatted-date-time value={createdDate} year="numeric" month="long" day="2-digit" hour="2-digit" minute="2-digit" second="2-digit"></lightning-formatted-date-time>
+                        <template if:true={createdByName}>
+                            &nbsp;{labels.signedOn} {createdByName}
+                        </template>
+                    </template>
+                </div>
+            </div>
         </div>
     </template>
-    <template if:false={signatureImage}>
-        <p>No signature image found.</p>
+    <template if:false={hasSignature}>
+        <div class="slds-illustration slds-illustration_small">
+            <div class="slds-text-longform">
+                <p class="slds-text-body_regular slds-text-color_weak">No signature image found.</p>
+            </div>
+        </div>
     </template>
-</template> 
+</template>
