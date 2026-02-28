@@ -28,4 +28,10 @@
         <apexClass>SignatureController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
+
+    <!-- Tab Visibility -->
+    <tabSettings>
+        <tab>Signature__c</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
 </PermissionSet>

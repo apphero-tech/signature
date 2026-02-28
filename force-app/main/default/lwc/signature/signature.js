@@ -44,11 +44,11 @@ export default class Signature extends LightningElement {
 
     @wire(getRecord, { recordId: '$recordId', fields: [SIGNATURE_IMAGE_FIELD, CREATED_DATE_FIELD, CREATED_BY_NAME_FIELD] })
     wiredSignature({ error, data }) {
-        if (data && data.fields.SignatureImage__c.value) {
+        if (data?.fields?.SignatureImage__c?.value) {
             this.lastSignature = {
                 image: data.fields.SignatureImage__c.value,
-                date: data.fields.CreatedDate.value,
-                name: data.fields.CreatedBy.displayValue || data.fields.CreatedBy.value.fields.Name.value
+                date: data.fields.CreatedDate?.value,
+                name: data.fields.CreatedBy?.displayValue || data.fields.CreatedBy?.value?.fields?.Name?.value
             };
         } else {
             this.lastSignature = null;
@@ -146,35 +146,34 @@ export default class Signature extends LightningElement {
     }
 
     async handleSave() {
-        this.signatureValue = this.canvas.toDataURL('image/png');
+        const dataUrl = this.canvas.toDataURL('image/png');
+        this.signatureValue = dataUrl;
         try {
             const recordId = await saveSignature({
-                base64Image: this.signatureValue,
+                base64Image: dataUrl,
                 relatedFieldName: this.relatedFieldName,
                 parentRecordId: this.parentRecordId
             });
-            // Met à jour l'aperçu localement (en attendant le wire refresh)
             this.lastSignature = {
-                image: this.signatureValue,
+                image: dataUrl,
                 date: new Date().toISOString(),
                 name: 'You'
             };
             this.dispatchEvent(new CustomEvent('signature', {
-                detail: { dataUrl: this.signatureValue, recordId }
+                detail: { dataUrl, recordId }
             }));
-            // Show success toast
             this.dispatchEvent(new ShowToastEvent({
                 title: 'Success',
                 message: this.labels.saveSuccess,
                 variant: 'success'
             }));
-            // Efface le canvas après sauvegarde
             this.clearCanvas();
+            // Preserve signature value for Flow output after canvas clear
+            this.signatureValue = dataUrl;
         } catch (error) {
-            // Show error toast
             this.dispatchEvent(new ShowToastEvent({
                 title: 'Error',
-                message: this.labels.saveError + ' ' + (error.body && error.body.message ? error.body.message : error.message),
+                message: this.labels.saveError + ' ' + (error.body?.message || error.message),
                 variant: 'error'
             }));
         }

@@ -66,4 +66,87 @@ private class SignatureControllerTest {
         List<Signature__c> signatures = [SELECT Id, SignatureImage__c FROM Signature__c ORDER BY CreatedDate];
         System.assertEquals(2, signatures.size(), 'Two signatures should be created');
     }
+
+    @IsTest
+    static void testSaveSignatureWithBlankImage() {
+        Test.startTest();
+        try {
+            SignatureController.saveSignature('', null, null);
+            System.assert(false, 'Expected AuraHandledException for blank image');
+        } catch (AuraHandledException e) {
+            System.assert(
+                e.getMessage().contains('Signature image data is required'),
+                'Expected error about required image data, got: ' + e.getMessage()
+            );
+        }
+        Test.stopTest();
+    }
+
+    @IsTest
+    static void testSaveSignatureWithNullImage() {
+        Test.startTest();
+        try {
+            SignatureController.saveSignature(null, null, null);
+            System.assert(false, 'Expected AuraHandledException for null image');
+        } catch (AuraHandledException e) {
+            System.assert(
+                e.getMessage().contains('Signature image data is required'),
+                'Expected error about required image data, got: ' + e.getMessage()
+            );
+        }
+        Test.stopTest();
+    }
+
+    @IsTest
+    static void testSaveSignatureWithInvalidFieldName() {
+        String base64Image = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
+
+        Test.startTest();
+        try {
+            SignatureController.saveSignature(base64Image, 'NonExistentField__c', '001000000000001AAA');
+            System.assert(false, 'Expected AuraHandledException for invalid field');
+        } catch (AuraHandledException e) {
+            System.assert(
+                e.getMessage().contains('Invalid field'),
+                'Expected error about invalid field, got: ' + e.getMessage()
+            );
+        }
+        Test.stopTest();
+    }
+
+    @IsTest
+    static void testSaveSignatureWithNonLookupField() {
+        String base64Image = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
+
+        Test.startTest();
+        try {
+            // SignatureImage__c is a LongTextArea, not a lookup field
+            SignatureController.saveSignature(base64Image, 'SignatureImage__c', '001000000000001AAA');
+            System.assert(false, 'Expected AuraHandledException for non-lookup field');
+        } catch (AuraHandledException e) {
+            System.assert(
+                e.getMessage().contains('lookup or master-detail'),
+                'Expected error about field type, got: ' + e.getMessage()
+            );
+        }
+        Test.stopTest();
+    }
+
+    @IsTest
+    static void testSaveSignatureWithInvalidParentId() {
+        String base64Image = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
+
+        Test.startTest();
+        try {
+            // OwnerId is a valid lookup field on all custom objects
+            SignatureController.saveSignature(base64Image, 'OwnerId', 'not-a-valid-id');
+            System.assert(false, 'Expected AuraHandledException for invalid parent ID');
+        } catch (AuraHandledException e) {
+            System.assert(
+                e.getMessage().contains('Invalid parent record ID'),
+                'Expected error about invalid parent ID format, got: ' + e.getMessage()
+            );
+        }
+        Test.stopTest();
+    }
 }
