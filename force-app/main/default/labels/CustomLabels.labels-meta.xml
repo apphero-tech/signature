@@ -65,4 +65,12 @@
         <value>Saved signature image</value>
         <categories>Signature</categories>
     </labels>
+    <labels>
+        <fullName>Sig_NoSignatureFound</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Signature Found</shortDescription>
+        <value>No signature image found.</value>
+        <categories>Signature</categories>
+    </labels>
 </CustomLabels>

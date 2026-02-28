@@ -3,7 +3,7 @@ import { getRecord } from 'lightning/uiRecordApi';
 
 // Custom Labels for i18n
 import labelSignedOn from '@salesforce/label/c.Sig_SignedBy';
-import labelNoSignature from '@salesforce/label/c.Sig_LastSignature';
+import labelNoSignature from '@salesforce/label/c.Sig_NoSignatureFound';
 import labelSignatureImageAlt from '@salesforce/label/c.Sig_SignatureImageAlt';
 
 const SIGNATURE_IMAGE_FIELD = 'Signature__c.SignatureImage__c';
@@ -23,21 +23,17 @@ export default class SignatureImageViewer extends LightningElement {
     signatureRecord;
 
     get signatureImage() {
-        return this.signatureRecord.data
-            ? this.signatureRecord.data.fields.SignatureImage__c.value
-            : null;
+        return this.signatureRecord?.data?.fields?.SignatureImage__c?.value || null;
     }
 
     get createdDate() {
-        return this.signatureRecord.data
-            ? this.signatureRecord.data.fields.CreatedDate.value
-            : null;
+        return this.signatureRecord?.data?.fields?.CreatedDate?.value || null;
     }
 
     get createdByName() {
-        return this.signatureRecord.data
-            ? this.signatureRecord.data.fields.CreatedBy.displayValue || this.signatureRecord.data.fields.CreatedBy.value.fields.Name.value
-            : null;
+        return this.signatureRecord?.data?.fields?.CreatedBy?.displayValue
+            || this.signatureRecord?.data?.fields?.CreatedBy?.value?.fields?.Name?.value
+            || null;
     }
 
     get hasSignature() {
