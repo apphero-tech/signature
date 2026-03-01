@@ -8,7 +8,7 @@ A professional, responsive Lightning Web Component (LWC) for capturing, storing,
 
 ## Features
 
-- **Signature Drawing** - Smooth canvas-based signature capture with touch and mouse support
+- **Simple Sign Capture** - Smooth canvas-based signature capture with touch and mouse support
 - **Responsive Design** - Works seamlessly on desktop, tablet, and mobile devices
 - **Secure Storage** - Signatures saved as base64 PNG in custom object records
 - **Flow Integration** - Full Screen Flow support with input/output parameters
@@ -22,7 +22,8 @@ A professional, responsive Lightning Web Component (LWC) for capturing, storing,
 |-----------|------|-------------|
 | `simpleSignCapture` | LWC | Main signature capture component |
 | `simpleSignViewer` | LWC | Read-only signature display component |
-| `SimpleSignController` | Apex Class | Backend controller for saving signatures |
+| `simpleSignSetup` | LWC | Post-installation setup guide |
+| `SimpleSignController` | Apex Class | Backend controller for saving and querying signatures |
 | `Signature__c` | Custom Object | Stores signature records |
 | `SimpleSignUser` | Permission Set | Standard user access |
 | `SimpleSignAdmin` | Permission Set | Admin access with full permissions |

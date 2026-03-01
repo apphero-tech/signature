@@ -46,7 +46,7 @@
 
 ## 3. Core Modules
 
-### Signature Capture Module
+### Simple Sign Capture Module
 
 - **Canvas-based drawing**: HTML5 Canvas with smooth line rendering (2.3px blue stroke)
 - **Touch and mouse support**: Works on desktop, tablet, and mobile
@@ -54,13 +54,13 @@
 - **Toast confirmation**: Success/error toast notifications after save
 - **Flow output**: Exposes the base64 signature value as an output parameter for Screen Flows
 
-### Signature Storage Module
+### Simple Sign Storage Module
 
 - **Custom Object**: `Signature__c` with auto-numbered names (SIG-0001, SIG-0002, etc.)
 - **Image Field**: `SignatureImage__c` — Long Text Area (128 KB) storing base64 PNG data
 - **Dynamic Lookup**: Subscribers can add their own lookup fields (e.g., `Account__c`, `Contact__c`) and pass the field API name as a parameter to link signatures to any object
 
-### Signature Display Module
+### Simple Sign Viewer Module
 
 - **Read-only viewer**: Shows the saved signature image with creation date and signer name
 - **No-signature state**: Displays a friendly message when no signature is found

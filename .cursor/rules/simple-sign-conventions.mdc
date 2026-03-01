@@ -26,7 +26,14 @@ alwaysApply: true
 
 ## Custom Object
 
-The data object is `Signature__c` (stores the actual signature data). Do NOT rename it to match the product — it describes the data, not the brand.
+The data object API name is `Signature__c` but its label/pluralLabel is "Simple Sign" for consistent branding in tabs and UI. Do NOT rename the API name — only labels carry the brand.
+
+## Custom Tabs
+
+| Tab | Type | Label shown |
+|-----|------|-------------|
+| `Signature__c` | Object tab | "Simple Sign" (from object pluralLabel) |
+| `Simple_Sign_Setup` | LWC tab | "Simple Sign Setup" |
 
 ## 2GP Rules
 
