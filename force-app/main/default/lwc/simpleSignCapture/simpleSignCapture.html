@@ -5,6 +5,8 @@
                 <canvas
                     class="capture-canvas"
                     lwc:dom="manual"
+                    role="img"
+                    aria-label={labels.drawSignature}
                     onmousedown={handleMouseDown}
                     onmousemove={handleMouseMove}
                     onmouseup={handleMouseUp}
@@ -21,10 +23,11 @@
                     label={labels.clear}
                     variant="neutral"
                     onclick={handleClear}
+                    disabled={isSaving}
                     class="slds-m-right_x-small">
                 </lightning-button>
                 <lightning-button
-                    label={labels.save}
+                    label={saveButtonLabel}
                     variant="brand"
                     onclick={handleSave}
                     disabled={isSaveDisabled}>

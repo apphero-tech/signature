@@ -10,6 +10,7 @@ import CREATED_BY_NAME_FIELD from '@salesforce/schema/Signature__c.CreatedBy.Nam
 import labelDrawSignature from '@salesforce/label/c.SimpleSign_DrawYourSignature';
 import labelClear from '@salesforce/label/c.SimpleSign_Clear';
 import labelSave from '@salesforce/label/c.SimpleSign_Save';
+import labelSaving from '@salesforce/label/c.SimpleSign_Saving';
 import labelLastSignature from '@salesforce/label/c.SimpleSign_LastSignature';
 import labelSignedBy from '@salesforce/label/c.SimpleSign_SignedBy';
 import labelSaveSuccess from '@salesforce/label/c.SimpleSign_SaveSuccess';
@@ -21,6 +22,7 @@ export default class SimpleSignCapture extends LightningElement {
         drawSignature: labelDrawSignature,
         clear: labelClear,
         save: labelSave,
+        saving: labelSaving,
         lastSignature: labelLastSignature,
         signedBy: labelSignedBy,
         saveSuccess: labelSaveSuccess,
@@ -32,8 +34,11 @@ export default class SimpleSignCapture extends LightningElement {
     context;
     isDrawing = false;
     isEmpty = true;
+    isSaving = false;
     lastPoint = null;
     strokeStarted = false;
+    canvasWidth = 350;
+    canvasHeight = 150;
 
     @api recordId;
     @api parentRecordId;
@@ -68,17 +73,33 @@ export default class SimpleSignCapture extends LightningElement {
         if (!this.canvas) {
             this.canvas = this.template.querySelector('canvas');
             this.context = this.canvas.getContext('2d');
+            this.adjustForHiDpi();
             this.clearCanvas();
         }
     }
 
-    clearCanvas() {
-        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.signatureValue = '';
+    adjustForHiDpi() {
+        const dpr = window.devicePixelRatio || 1;
+        const displayWidth = this.canvas.clientWidth || 350;
+        const displayHeight = this.canvas.clientHeight || 150;
+        this.canvas.width = Math.round(displayWidth * dpr);
+        this.canvas.height = Math.round(displayHeight * dpr);
+        this.context.scale(dpr, dpr);
+        this.canvasWidth = displayWidth;
+        this.canvasHeight = displayHeight;
+    }
+
+    resetDrawing() {
+        this.context.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
         this.isEmpty = true;
         this.lastPoint = null;
         this.strokeStarted = false;
         this.context.beginPath();
+    }
+
+    clearCanvas() {
+        this.resetDrawing();
+        this.signatureValue = '';
     }
 
     handleMouseDown(event) {
@@ -127,8 +148,8 @@ export default class SimpleSignCapture extends LightningElement {
 
     draw(event) {
         const rect = this.canvas.getBoundingClientRect();
-        const x = ((event.clientX || event.pageX) - rect.left);
-        const y = ((event.clientY || event.pageY) - rect.top);
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
 
         if (this.isDrawing) {
             this.context.lineWidth = 2.3;
@@ -153,8 +174,8 @@ export default class SimpleSignCapture extends LightningElement {
     }
 
     async handleSave() {
+        this.isSaving = true;
         const dataUrl = this.canvas.toDataURL('image/png');
-        this.signatureValue = dataUrl;
         try {
             const recordId = await saveSignature({
                 base64Image: dataUrl,
@@ -174,7 +195,7 @@ export default class SimpleSignCapture extends LightningElement {
                 message: this.labels.saveSuccess,
                 variant: 'success'
             }));
-            this.clearCanvas();
+            this.resetDrawing();
             this.signatureValue = dataUrl;
         } catch (error) {
             this.dispatchEvent(new ShowToastEvent({
@@ -182,10 +203,16 @@ export default class SimpleSignCapture extends LightningElement {
                 message: this.labels.saveError + ' ' + (error.body?.message || error.message),
                 variant: 'error'
             }));
+        } finally {
+            this.isSaving = false;
         }
     }
 
     get isSaveDisabled() {
-        return this.isEmpty;
+        return this.isEmpty || this.isSaving;
+    }
+
+    get saveButtonLabel() {
+        return this.isSaving ? this.labels.saving : this.labels.save;
     }
 }

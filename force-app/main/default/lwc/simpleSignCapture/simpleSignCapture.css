@@ -11,7 +11,7 @@
 }
 
 .capture-canvas {
-    background: #fff;
+    background: var(--lwc-colorBackgroundAlt, #fff);
     border: 1px dashed var(--lwc-colorBorderInput, #c9c9c9);
     border-radius: 0.25rem;
     width: 100%;

@@ -72,4 +72,12 @@
         <value>No signature image found.</value>
         <categories>SimpleSign</categories>
     </labels>
+    <labels>
+        <fullName>SimpleSign_Saving</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Saving Button</shortDescription>
+        <value>Saving...</value>
+        <categories>SimpleSign</categories>
+    </labels>
 </CustomLabels>
