@@ -1,0 +1,42 @@
+<template>
+    <lightning-card title="Simple Sign — Setup Guide" icon-name="custom:custom26">
+        <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+            <p class="slds-text-body_regular slds-m-bottom_medium">
+                Follow these steps to configure Simple Sign after installation.
+            </p>
+
+            <ol class="slds-setup-assistant">
+                <template for:each={steps} for:item="step">
+                    <li key={step.number} class="slds-setup-assistant__item">
+                        <article class="slds-setup-assistant__step">
+                            <div class="slds-summary-detail">
+                                <div class="slds-container_fluid">
+                                    <div class="slds-media">
+                                        <div class="slds-media__figure">
+                                            <div class="setup-step-number">
+                                                <lightning-icon icon-name={step.icon} size="small" alternative-text={step.title}></lightning-icon>
+                                            </div>
+                                        </div>
+                                        <div class="slds-media__body slds-m-top_xx-small">
+                                            <h3 class="slds-setup-assistant__step-title">
+                                                <span class="slds-text-heading_small">
+                                                    Step {step.number}: {step.title}
+                                                </span>
+                                            </h3>
+                                            <p class="slds-setup-assistant__step-description slds-m-top_xx-small">
+                                                {step.description}
+                                            </p>
+                                            <div class="setup-detail-box slds-m-top_x-small">
+                                                <p class="slds-text-body_small">{step.detail}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </li>
+                </template>
+            </ol>
+        </div>
+    </lightning-card>
+</template>

@@ -1,7 +1,11 @@
 import { LightningElement, api, wire } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import { getRecord, getFieldValue, getFieldDisplayValue } from 'lightning/uiRecordApi';
 import saveSignature from '@salesforce/apex/SimpleSignController.saveSignature';
-import { getRecord } from 'lightning/uiRecordApi';
+
+import SIGNATURE_IMAGE_FIELD from '@salesforce/schema/Signature__c.SignatureImage__c';
+import CREATED_DATE_FIELD from '@salesforce/schema/Signature__c.CreatedDate';
+import CREATED_BY_NAME_FIELD from '@salesforce/schema/Signature__c.CreatedBy.Name';
 
 import labelDrawSignature from '@salesforce/label/c.SimpleSign_DrawYourSignature';
 import labelClear from '@salesforce/label/c.SimpleSign_Clear';
@@ -11,10 +15,6 @@ import labelSignedBy from '@salesforce/label/c.SimpleSign_SignedBy';
 import labelSaveSuccess from '@salesforce/label/c.SimpleSign_SaveSuccess';
 import labelSaveError from '@salesforce/label/c.SimpleSign_SaveError';
 import labelSignatureImageAlt from '@salesforce/label/c.SimpleSign_SignatureImageAlt';
-
-const SIGNATURE_IMAGE_FIELD = 'Signature__c.SignatureImage__c';
-const CREATED_DATE_FIELD = 'Signature__c.CreatedDate';
-const CREATED_BY_NAME_FIELD = 'Signature__c.CreatedBy.Name';
 
 export default class SimpleSignCapture extends LightningElement {
     labels = {
@@ -40,14 +40,23 @@ export default class SimpleSignCapture extends LightningElement {
     @api relatedFieldName;
     lastSignature = null;
 
-    @wire(getRecord, { recordId: '$recordId', fields: [SIGNATURE_IMAGE_FIELD, CREATED_DATE_FIELD, CREATED_BY_NAME_FIELD] })
+    @wire(getRecord, {
+        recordId: '$recordId',
+        fields: [SIGNATURE_IMAGE_FIELD, CREATED_DATE_FIELD, CREATED_BY_NAME_FIELD]
+    })
     wiredSignature({ error, data }) {
-        if (data?.fields?.SignatureImage__c?.value) {
-            this.lastSignature = {
-                image: data.fields.SignatureImage__c.value,
-                date: data.fields.CreatedDate?.value,
-                name: data.fields.CreatedBy?.displayValue || data.fields.CreatedBy?.value?.fields?.Name?.value
-            };
+        if (data) {
+            const image = getFieldValue(data, SIGNATURE_IMAGE_FIELD);
+            if (image) {
+                this.lastSignature = {
+                    image,
+                    date: getFieldValue(data, CREATED_DATE_FIELD),
+                    name: getFieldDisplayValue(data, CREATED_BY_NAME_FIELD)
+                        || getFieldValue(data, CREATED_BY_NAME_FIELD)
+                };
+            } else {
+                this.lastSignature = null;
+            }
         } else {
             this.lastSignature = null;
         }
@@ -123,8 +132,8 @@ export default class SimpleSignCapture extends LightningElement {
 
         if (this.isDrawing) {
             this.context.lineWidth = 2.3;
-            this.context.lineCap = "round";
-            this.context.strokeStyle = "#1b96ff";
+            this.context.lineCap = 'round';
+            this.context.strokeStyle = '#1b96ff';
             if (!this.lastPoint) {
                 this.context.moveTo(x, y);
             } else {

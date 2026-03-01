@@ -1,117 +1,42 @@
 :host {
     display: block;
-    padding: 1rem;
-    background: var(--lwc-colorBackground, #f3f6f9);
-    border: 1px solid var(--lwc-colorBorder, #d8dde6);
+}
+
+.capture-canvas-container {
+    background: var(--lwc-colorBackgroundAlt, #fff);
+    border: 1px solid var(--lwc-colorBorder, #e5e5e5);
     border-radius: 0.5rem;
-    box-shadow: var(--lwc-shadowSmall, 0 1px 2px 0 #e5e5e5);
-    max-width: 400px;
-    margin: 0 auto;
+    padding: 0.5rem;
+    text-align: center;
 }
 
-.signature-main-container {
-    max-width: 400px;
-    width: 100%;
-    margin: 0 auto;
-}
-
-.signature-title {
-    font-size: 1.1rem;
-    color: var(--lwc-colorTextLabel, #514f4d);
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-}
-
-.signature-canvas {
+.capture-canvas {
     background: #fff;
-    border: 1.5px solid var(--lwc-colorBorderInput, #c9c9c9);
-    border-radius: 0.4rem;
+    border: 1px dashed var(--lwc-colorBorderInput, #c9c9c9);
+    border-radius: 0.25rem;
     width: 100%;
     max-width: 350px;
     height: 150px;
     display: block;
     margin: 0 auto;
-    min-height: 140px;
-    max-height: 180px;
     cursor: crosshair;
     touch-action: none;
-    transition: border 0.2s;
 }
 
-.signature-buttons {
-    margin-top: 0.7rem;
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.5rem;
+.capture-last-section {
+    border-top: 1px solid var(--lwc-colorBorder, #e5e5e5);
+    padding-top: 0.75rem;
 }
 
-.signature-btn {
-    background: var(--lwc-brandAccessible, #0176d3);
-    color: white;
-    border: none;
+.capture-last-image-container {
+    background: var(--lwc-colorBackgroundAlt, #fff);
+    border: 1px solid var(--lwc-colorBorder, #e5e5e5);
     border-radius: 0.25rem;
-    padding: 0.5rem 1.1rem;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.2s;
+    padding: 0.25rem;
 }
 
-.signature-btn:active,
-.signature-btn:focus {
-    background: var(--lwc-brandAccessibleActive, #014486);
-    outline: none;
-}
-
-.signature-btn.secondary {
-    background: var(--lwc-colorBackgroundAlt, #f3f6f9);
-    color: var(--lwc-colorTextDefault, #1b263c);
-    border: 1px solid var(--lwc-colorBorder, #d8dde6);
-}
-
-.signature-btn.secondary:active,
-.signature-btn.secondary:focus {
-    background: #e3e8ee;
-}
-
-.signature-btn:disabled {
-    background: #cccccc;
-    color: #888888;
-    cursor: not-allowed;
-    opacity: 0.7;
-}
-
-.signature-last-card {
-    margin: 1.5em auto 0 auto;
-    max-width: 350px;
-    width: 100%;
-    border-radius: 1.2rem;
-    background: #fff;
-    overflow: hidden;
-    box-shadow: 0 1px 4px 0 #e5e5e5;
-}
-
-.signature-last-card-body {
-    border-radius: 1.2rem;
-}
-
-.signature-last-image {
+.capture-last-image {
     max-width: 80px;
     max-height: 40px;
-    border: none;
-    border-radius: 0.7rem;
-    background: #fff;
-}
-
-.signature-last-info {
-    padding-left: 1em;
-}
-
-.signature-last-date {
-    font-size: 0.95em;
-    color: #444;
-}
-
-.signature-last-label {
-    font-size: 0.85em;
-    color: #888;
+    display: block;
 }

@@ -2,24 +2,17 @@
     display: block;
 }
 
-.slds-card {
-    background: var(--lwc-colorBackground, #f3f6f9);
+.viewer-image-container {
+    background: var(--lwc-colorBackgroundAlt, #fff);
+    border: 1px solid var(--lwc-colorBorder, #e5e5e5);
     border-radius: 0.5rem;
-    padding: 1rem;
+    padding: 0.75rem;
+    text-align: center;
 }
 
 .viewer-image {
     display: block;
     max-width: 100%;
     height: auto;
-    border: 1px solid #ccc;
-    padding: 8px;
-    border-radius: 6px;
-    background: #fff;
-}
-
-.viewer-meta {
-    margin-top: 0.5em;
-    color: #666;
-    font-size: 0.95em;
+    margin: 0 auto;
 }

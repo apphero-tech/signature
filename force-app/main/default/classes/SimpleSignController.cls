@@ -46,4 +46,55 @@ public with sharing class SimpleSignController {
 
         return sig.Id;
     }
+
+    @AuraEnabled(cacheable=true)
+    public static Map<String, Object> getLatestSignature(String relatedFieldName, String parentRecordId) {
+        if (String.isBlank(relatedFieldName) || String.isBlank(parentRecordId)) {
+            return null;
+        }
+
+        if (!Schema.sObjectType.Signature__c.isAccessible()) {
+            throw new AuraHandledException('Insufficient permissions to read Signature records.');
+        }
+
+        Schema.SObjectField field = Schema.sObjectType.Signature__c.fields.getMap().get(relatedFieldName);
+        if (field == null) {
+            throw new AuraHandledException('Invalid field: ' + relatedFieldName);
+        }
+
+        Schema.DescribeFieldResult fieldDescribe = field.getDescribe();
+        if (fieldDescribe.getType() != Schema.DisplayType.REFERENCE) {
+            throw new AuraHandledException('Field must be a lookup or master-detail field: ' + relatedFieldName);
+        }
+
+        if (!fieldDescribe.isAccessible()) {
+            throw new AuraHandledException('Insufficient permissions for field: ' + relatedFieldName);
+        }
+
+        Id validParentId;
+        try {
+            validParentId = Id.valueOf(parentRecordId);
+        } catch (Exception e) {
+            throw new AuraHandledException('Invalid parent record ID format.');
+        }
+
+        String query = 'SELECT Id, SignatureImage__c, CreatedDate, CreatedBy.Name'
+            + ' FROM Signature__c'
+            + ' WHERE ' + String.escapeSingleQuotes(fieldDescribe.getName()) + ' = :validParentId'
+            + ' ORDER BY CreatedDate DESC, Id DESC'
+            + ' LIMIT 1';
+
+        List<Signature__c> results = Database.query(query);
+        if (results.isEmpty()) {
+            return null;
+        }
+
+        Signature__c sig = results[0];
+        Map<String, Object> result = new Map<String, Object>();
+        result.put('id', sig.Id);
+        result.put('signatureImage', sig.SignatureImage__c);
+        result.put('createdDate', sig.CreatedDate);
+        result.put('createdByName', sig.CreatedBy.Name);
+        return result;
+    }
 }

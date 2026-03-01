@@ -26,4 +26,8 @@
         <tab>Signature__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
+    <tabSettings>
+        <tab>Simple_Sign_Setup</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
 </PermissionSet>

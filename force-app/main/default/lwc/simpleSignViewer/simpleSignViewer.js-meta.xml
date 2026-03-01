@@ -12,9 +12,18 @@
     </targets>
     <targetConfigs>
         <targetConfig targets="lightning__RecordPage">
-            <objects>
-                <object>Signature__c</object>
-            </objects>
+            <property 
+                name="relatedFieldName" 
+                type="String" 
+                label="Lookup Field API Name" 
+                description="API name of the lookup field on Signature__c that points to this object (e.g., Account__c). Leave empty when placed on a Signature__c record page."/>
+        </targetConfig>
+        <targetConfig targets="lightning__AppPage,lightning__HomePage">
+            <property 
+                name="relatedFieldName" 
+                type="String" 
+                label="Lookup Field API Name" 
+                description="API name of the lookup field on Signature__c (e.g., Account__c)"/>
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

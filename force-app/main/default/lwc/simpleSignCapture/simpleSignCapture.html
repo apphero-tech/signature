@@ -1,42 +1,67 @@
 <template>
-    <div class="signature-main-container slds-p-around_medium">
-        <div class="signature-title">{labels.drawSignature}</div>
-        <canvas
-            class="signature-canvas"
-            lwc:dom="manual"
-            onmousedown={handleMouseDown}
-            onmousemove={handleMouseMove}
-            onmouseup={handleMouseUp}
-            onmouseleave={handleMouseUp}
-            ontouchstart={handleTouchStart}
-            ontouchmove={handleTouchMove}
-            ontouchend={handleTouchEnd}
-            width="350"
-            height="150"
-        ></canvas>
-        <div class="signature-buttons slds-m-top_small">
-            <button class="signature-btn secondary" onclick={handleClear}>{labels.clear}</button>
-            <button class="signature-btn" onclick={handleSave} disabled={isSaveDisabled}>{labels.save}</button>
+    <lightning-card title={labels.drawSignature} icon-name="custom:custom26">
+        <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+            <div class="capture-canvas-container">
+                <canvas
+                    class="capture-canvas"
+                    lwc:dom="manual"
+                    onmousedown={handleMouseDown}
+                    onmousemove={handleMouseMove}
+                    onmouseup={handleMouseUp}
+                    onmouseleave={handleMouseUp}
+                    ontouchstart={handleTouchStart}
+                    ontouchmove={handleTouchMove}
+                    ontouchend={handleTouchEnd}
+                    width="350"
+                    height="150"
+                ></canvas>
+            </div>
+            <div class="slds-m-top_small slds-grid slds-grid_align-end slds-grid_vertical-align-center">
+                <lightning-button
+                    label={labels.clear}
+                    variant="neutral"
+                    onclick={handleClear}
+                    class="slds-m-right_x-small">
+                </lightning-button>
+                <lightning-button
+                    label={labels.save}
+                    variant="brand"
+                    onclick={handleSave}
+                    disabled={isSaveDisabled}>
+                </lightning-button>
+            </div>
         </div>
+
         <template if:true={lastSignature}>
-            <div class="slds-card signature-last-card">
-                <div class="slds-card__body slds-card__body_inner signature-last-card-body">
-                    <div class="slds-media">
+            <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+                <div class="capture-last-section">
+                    <h3 class="slds-text-title_caps slds-m-bottom_x-small">{labels.lastSignature}</h3>
+                    <div class="slds-media slds-media_center">
                         <div class="slds-media__figure">
-                            <img src={lastSignature.image} alt={labels.signatureImageAlt} class="signature-last-image" />
-                        </div>
-                        <div class="slds-media__body signature-last-info">
-                            <div class="signature-last-date">
-                                <lightning-formatted-date-time value={lastSignature.date} year="numeric" month="long" day="2-digit" hour="2-digit" minute="2-digit" second="2-digit"></lightning-formatted-date-time>
-                                <template if:true={lastSignature.name}>
-                                    &nbsp;{labels.signedBy} {lastSignature.name}
-                                </template>
+                            <div class="capture-last-image-container">
+                                <img src={lastSignature.image} alt={labels.signatureImageAlt} class="capture-last-image" />
                             </div>
-                            <div class="signature-last-label">{labels.lastSignature}</div>
+                        </div>
+                        <div class="slds-media__body">
+                            <p class="slds-text-body_small slds-text-color_weak">
+                                <lightning-formatted-date-time
+                                    value={lastSignature.date}
+                                    year="numeric"
+                                    month="long"
+                                    day="2-digit"
+                                    hour="2-digit"
+                                    minute="2-digit">
+                                </lightning-formatted-date-time>
+                            </p>
+                            <template if:true={lastSignature.name}>
+                                <p class="slds-text-body_small slds-text-color_weak">
+                                    {labels.signedBy} {lastSignature.name}
+                                </p>
+                            </template>
                         </div>
                     </div>
                 </div>
             </div>
         </template>
-    </div>
+    </lightning-card>
 </template>

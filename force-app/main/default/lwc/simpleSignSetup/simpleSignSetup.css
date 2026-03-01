@@ -1,0 +1,48 @@
+:host {
+    display: block;
+}
+
+.slds-setup-assistant {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.slds-setup-assistant__item {
+    padding: 0;
+    margin-bottom: 0.75rem;
+}
+
+.slds-setup-assistant__step {
+    border: 1px solid var(--lwc-colorBorder, #e5e5e5);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background: var(--lwc-colorBackgroundAlt, #fff);
+}
+
+.setup-step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: var(--lwc-colorBackground, #f3f3f3);
+    border: 1px solid var(--lwc-colorBorder, #e5e5e5);
+    flex-shrink: 0;
+}
+
+.slds-setup-assistant__step-title {
+    font-weight: 700;
+}
+
+.slds-setup-assistant__step-description {
+    color: var(--lwc-colorTextDefault, #181818);
+}
+
+.setup-detail-box {
+    background: var(--lwc-colorBackground, #f3f3f3);
+    border-radius: 0.25rem;
+    padding: 0.5rem 0.75rem;
+    border-left: 3px solid var(--lwc-brandAccessible, #0176d3);
+}

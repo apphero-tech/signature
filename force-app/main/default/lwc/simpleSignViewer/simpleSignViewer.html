@@ -1,24 +1,39 @@
 <template>
-    <template if:true={hasSignature}>
-        <div class="slds-card">
-            <div class="slds-card__body slds-card__body_inner">
-                <img src={signatureImage} alt={labels.signatureImageAlt} class="viewer-image" />
-                <div class="viewer-meta">
+    <lightning-card title={labels.lastSignature} icon-name="custom:custom26">
+        <template if:true={hasSignature}>
+            <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+                <div class="viewer-image-container">
+                    <img src={signatureImage} alt={labels.signatureImageAlt} class="viewer-image" />
+                </div>
+                <div class="slds-m-top_small">
                     <template if:true={createdDate}>
-                        <lightning-formatted-date-time value={createdDate} year="numeric" month="long" day="2-digit" hour="2-digit" minute="2-digit" second="2-digit"></lightning-formatted-date-time>
-                        <template if:true={createdByName}>
-                            &nbsp;{labels.signedOn} {createdByName}
-                        </template>
+                        <p class="slds-text-body_small slds-text-color_weak">
+                            <lightning-icon icon-name="utility:clock" size="xx-small" alternative-text="Date" class="slds-m-right_xx-small"></lightning-icon>
+                            <lightning-formatted-date-time
+                                value={createdDate}
+                                year="numeric"
+                                month="long"
+                                day="2-digit"
+                                hour="2-digit"
+                                minute="2-digit">
+                            </lightning-formatted-date-time>
+                        </p>
+                    </template>
+                    <template if:true={createdByName}>
+                        <p class="slds-text-body_small slds-text-color_weak slds-m-top_xx-small">
+                            <lightning-icon icon-name="utility:user" size="xx-small" alternative-text="User" class="slds-m-right_xx-small"></lightning-icon>
+                            {labels.signedOn} {createdByName}
+                        </p>
                     </template>
                 </div>
             </div>
-        </div>
-    </template>
-    <template if:false={hasSignature}>
-        <div class="slds-illustration slds-illustration_small">
-            <div class="slds-text-longform">
-                <p class="slds-text-body_regular slds-text-color_weak">{labels.noSignature}</p>
+        </template>
+        <template if:false={hasSignature}>
+            <div class="slds-p-around_medium slds-text-align_center">
+                <div class="slds-illustration slds-illustration_small">
+                    <p class="slds-text-body_regular slds-text-color_weak">{labels.noSignature}</p>
+                </div>
             </div>
-        </div>
-    </template>
+        </template>
+    </lightning-card>
 </template>
