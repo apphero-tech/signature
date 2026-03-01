@@ -123,7 +123,7 @@ private class SimpleSignControllerTest {
     static void testSaveSignatureWithNonLookupField() {
         Test.startTest();
         try {
-            SimpleSignController.saveSignature(BASE64_IMAGE, 'SignatureImage__c', '001000000000001AAA');
+            SimpleSignController.saveSignature(BASE64_IMAGE, 'Name', '001000000000001AAA');
             Assert.fail('Should have thrown for non-lookup field');
         } catch (AuraHandledException e) {
             Assert.areEqual('The specified field must be a lookup or master-detail relationship.', e.getMessage(),
