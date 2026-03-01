@@ -24,15 +24,22 @@ alwaysApply: true
 | Custom Labels | `SimpleSign_<Name>` | `SimpleSign_SaveSuccess` |
 | Label category | `SimpleSign` | — |
 
+## Naming: Product vs. Business Term
+
+- **"Simple Sign"** = product name, brand, marketing (components, permsets, labels, package)
+- **"Signature"** = business term, what the user actually does (object, fields, records, list views)
+
+Do NOT put the product name on data-level elements. A signature is a signature.
+
 ## Custom Object
 
-The data object API name is `Signature__c` but its label/pluralLabel is "Simple Sign" for consistent branding in tabs and UI. Do NOT rename the API name — only labels carry the brand.
+`Signature__c` — label "Signature", pluralLabel "Signatures". API name AND labels stay as-is. The object describes the data, not the brand.
 
 ## Custom Tabs
 
 | Tab | Type | Label shown |
 |-----|------|-------------|
-| `Signature__c` | Object tab | "Simple Sign" (from object pluralLabel) |
+| `Signature__c` | Object tab | "Signatures" (from object pluralLabel) |
 | `Simple_Sign_Setup` | LWC tab | "Simple Sign Setup" |
 
 ## 2GP Rules
