@@ -1,11 +1,11 @@
 {
   "orgName": "Signature Capture - Dev Org",
   "edition": "Developer",
+  "language": "en_US",
   "features": [
     "LightningSalesConsole",
     "LightningServiceConsole",
-    "Communities",
-    "FlowBuilderFlow"
+    "Communities"
   ],
   "settings": {
     "lightningExperienceSettings": {
@@ -17,11 +17,6 @@
     },
     "mobileSettings": {
       "enableS1EncryptedStoragePref2": false
-    },
-    "securitySettings": {
-      "passwordPolicies": {
-        "enableSetPasswordInApi": true
-      }
     }
   }
 }
