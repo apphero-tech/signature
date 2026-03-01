@@ -1,16 +1,15 @@
 import { LightningElement, api, wire } from 'lwc';
 import { getRecord } from 'lightning/uiRecordApi';
 
-// Custom Labels for i18n
-import labelSignedOn from '@salesforce/label/c.Sig_SignedBy';
-import labelNoSignature from '@salesforce/label/c.Sig_NoSignatureFound';
-import labelSignatureImageAlt from '@salesforce/label/c.Sig_SignatureImageAlt';
+import labelSignedOn from '@salesforce/label/c.SimpleSign_SignedBy';
+import labelNoSignature from '@salesforce/label/c.SimpleSign_NoSignatureFound';
+import labelSignatureImageAlt from '@salesforce/label/c.SimpleSign_SignatureImageAlt';
 
 const SIGNATURE_IMAGE_FIELD = 'Signature__c.SignatureImage__c';
 const CREATED_DATE_FIELD = 'Signature__c.CreatedDate';
 const CREATED_BY_NAME_FIELD = 'Signature__c.CreatedBy.Name';
 
-export default class SignatureImageViewer extends LightningElement {
+export default class SimpleSignViewer extends LightningElement {
     labels = {
         signedOn: labelSignedOn,
         noSignature: labelNoSignature,

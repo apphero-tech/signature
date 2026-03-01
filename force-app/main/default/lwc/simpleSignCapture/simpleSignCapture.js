@@ -1,24 +1,22 @@
-import { LightningElement, api, track, wire } from 'lwc';
+import { LightningElement, api, wire } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
-import saveSignature from '@salesforce/apex/SignatureController.saveSignature';
+import saveSignature from '@salesforce/apex/SimpleSignController.saveSignature';
 import { getRecord } from 'lightning/uiRecordApi';
 
-// Custom Labels for i18n
-import labelDrawSignature from '@salesforce/label/c.Sig_DrawYourSignature';
-import labelClear from '@salesforce/label/c.Sig_Clear';
-import labelSave from '@salesforce/label/c.Sig_Save';
-import labelLastSignature from '@salesforce/label/c.Sig_LastSignature';
-import labelSignedBy from '@salesforce/label/c.Sig_SignedBy';
-import labelSaveSuccess from '@salesforce/label/c.Sig_SaveSuccess';
-import labelSaveError from '@salesforce/label/c.Sig_SaveError';
-import labelSignatureImageAlt from '@salesforce/label/c.Sig_SignatureImageAlt';
+import labelDrawSignature from '@salesforce/label/c.SimpleSign_DrawYourSignature';
+import labelClear from '@salesforce/label/c.SimpleSign_Clear';
+import labelSave from '@salesforce/label/c.SimpleSign_Save';
+import labelLastSignature from '@salesforce/label/c.SimpleSign_LastSignature';
+import labelSignedBy from '@salesforce/label/c.SimpleSign_SignedBy';
+import labelSaveSuccess from '@salesforce/label/c.SimpleSign_SaveSuccess';
+import labelSaveError from '@salesforce/label/c.SimpleSign_SaveError';
+import labelSignatureImageAlt from '@salesforce/label/c.SimpleSign_SignatureImageAlt';
 
 const SIGNATURE_IMAGE_FIELD = 'Signature__c.SignatureImage__c';
 const CREATED_DATE_FIELD = 'Signature__c.CreatedDate';
 const CREATED_BY_NAME_FIELD = 'Signature__c.CreatedBy.Name';
 
-export default class Signature extends LightningElement {
-    // Expose labels to template
+export default class SimpleSignCapture extends LightningElement {
     labels = {
         drawSignature: labelDrawSignature,
         clear: labelClear,
@@ -33,14 +31,14 @@ export default class Signature extends LightningElement {
     canvas;
     context;
     isDrawing = false;
-    @track isEmpty = true;
+    isEmpty = true;
     lastPoint = null;
     strokeStarted = false;
 
-    @api recordId; // Pour charger la signature existante
-    @api parentRecordId; // ex: {!varInteractionId}
-    @api relatedFieldName; // ex: "Interaction__c"
-    @track lastSignature = null; // { image, date, name }
+    @api recordId;
+    @api parentRecordId;
+    @api relatedFieldName;
+    lastSignature = null;
 
     @wire(getRecord, { recordId: '$recordId', fields: [SIGNATURE_IMAGE_FIELD, CREATED_DATE_FIELD, CREATED_BY_NAME_FIELD] })
     wiredSignature({ error, data }) {
@@ -168,7 +166,6 @@ export default class Signature extends LightningElement {
                 variant: 'success'
             }));
             this.clearCanvas();
-            // Preserve signature value for Flow output after canvas clear
             this.signatureValue = dataUrl;
         } catch (error) {
             this.dispatchEvent(new ShowToastEvent({

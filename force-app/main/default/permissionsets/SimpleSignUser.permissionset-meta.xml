@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
-    <label>Signature User</label>
-    <description>Grants access to the Signature capture component and related objects. Assign this permission set to users who need to capture and view electronic signatures.</description>
+    <label>Simple Sign User</label>
+    <description>Grants access to Simple Sign capture component and related objects. Assign to users who need to capture and view electronic signatures.</description>
     <license>Salesforce</license>
     <hasActivationRequired>false</hasActivationRequired>
-    
-    <!-- Object Permissions for Signature__c -->
     <objectPermissions>
         <object>Signature__c</object>
         <allowCreate>true</allowCreate>
@@ -15,21 +13,15 @@
         <modifyAllRecords>false</modifyAllRecords>
         <viewAllRecords>false</viewAllRecords>
     </objectPermissions>
-    
-    <!-- Field Permissions for Signature__c -->
     <fieldPermissions>
         <field>Signature__c.SignatureImage__c</field>
         <editable>true</editable>
         <readable>true</readable>
     </fieldPermissions>
-    
-    <!-- Apex Class Access -->
     <classAccesses>
-        <apexClass>SignatureController</apexClass>
+        <apexClass>SimpleSignController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-
-    <!-- Tab Visibility -->
     <tabSettings>
         <tab>Signature__c</tab>
         <visibility>Visible</visibility>

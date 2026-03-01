@@ -9,6 +9,12 @@
     margin: 0 auto;
 }
 
+.signature-main-container {
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+}
+
 .signature-title {
     font-size: 1.1rem;
     color: var(--lwc-colorTextLabel, #514f4d);
@@ -21,6 +27,10 @@
     border: 1.5px solid var(--lwc-colorBorderInput, #c9c9c9);
     border-radius: 0.4rem;
     width: 100%;
+    max-width: 350px;
+    height: 150px;
+    display: block;
+    margin: 0 auto;
     min-height: 140px;
     max-height: 180px;
     cursor: crosshair;
@@ -64,8 +74,44 @@
 }
 
 .signature-btn:disabled {
-    background: #cccccc !important;
-    color: #888888 !important;
-    cursor: not-allowed !important;
+    background: #cccccc;
+    color: #888888;
+    cursor: not-allowed;
     opacity: 0.7;
+}
+
+.signature-last-card {
+    margin: 1.5em auto 0 auto;
+    max-width: 350px;
+    width: 100%;
+    border-radius: 1.2rem;
+    background: #fff;
+    overflow: hidden;
+    box-shadow: 0 1px 4px 0 #e5e5e5;
+}
+
+.signature-last-card-body {
+    border-radius: 1.2rem;
+}
+
+.signature-last-image {
+    max-width: 80px;
+    max-height: 40px;
+    border: none;
+    border-radius: 0.7rem;
+    background: #fff;
+}
+
+.signature-last-info {
+    padding-left: 1em;
+}
+
+.signature-last-date {
+    font-size: 0.95em;
+    color: #444;
+}
+
+.signature-last-label {
+    font-size: 0.85em;
+    color: #888;
 }

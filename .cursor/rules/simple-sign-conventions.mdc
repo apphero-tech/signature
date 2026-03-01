@@ -1,0 +1,43 @@
+---
+description: Simple Sign — 2GP managed package conventions and naming standards
+alwaysApply: true
+---
+
+# Simple Sign — Project Conventions
+
+## Product Identity
+
+- **Product name**: Simple Sign
+- **Namespace**: `aph`
+- **Package type**: Managed 2GP (AppExchange)
+- **DevHub**: `devhub` (jerome@apphero.tech)
+- **Scratch org alias**: `SigDev`
+
+## Naming Convention
+
+| Element | Pattern | Example |
+|---------|---------|---------|
+| LWC components | `simpleSign<Feature>` | `simpleSignCapture`, `simpleSignViewer` |
+| Apex classes | `SimpleSign<Role>` | `SimpleSignController` |
+| Apex tests | `SimpleSign<Role>Test` | `SimpleSignControllerTest` |
+| Permission Sets | `SimpleSign<Level>` | `SimpleSignAdmin`, `SimpleSignUser` |
+| Custom Labels | `SimpleSign_<Name>` | `SimpleSign_SaveSuccess` |
+| Label category | `SimpleSign` | — |
+
+## Custom Object
+
+The data object is `Signature__c` (stores the actual signature data). Do NOT rename it to match the product — it describes the data, not the brand.
+
+## 2GP Rules
+
+- All custom labels must have `<protected>true</protected>`
+- No inline styles in LWC HTML templates — use CSS files
+- No XML comments in metadata files (Salesforce strips them on retrieve)
+- All components and classes must use API version `66.0`
+- Apex controllers must use `with sharing` and enforce CRUD/FLS
+
+## Scratch Org
+
+- Always use `config/project-scratch-def.json` with `"language": "en_US"` (DevHub is on a German instance)
+- Default scratch org alias: `SigDev`
+- Always set `--set-default` when creating scratch orgs for this project

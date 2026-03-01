@@ -8,8 +8,18 @@
     padding: 1rem;
 }
 
-img {
+.viewer-image {
     display: block;
     max-width: 100%;
     height: auto;
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 6px;
+    background: #fff;
+}
+
+.viewer-meta {
+    margin-top: 0.5em;
+    color: #666;
+    font-size: 0.95em;
 }

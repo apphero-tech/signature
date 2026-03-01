@@ -3,7 +3,7 @@
     <fullName>SignatureImage__c</fullName>
     <label>Signature Image</label>
     <type>LongTextArea</type>
-    <length>32768</length>
+    <length>131072</length>
     <visibleLines>3</visibleLines>
     <description>Base64-encoded PNG image of the signature</description>
     <inlineHelpText>Stores the base64 string of the drawn signature</inlineHelpText>

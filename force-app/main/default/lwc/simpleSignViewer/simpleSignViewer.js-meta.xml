@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>63.0</apiVersion>
+    <apiVersion>66.0</apiVersion>
     <isExposed>true</isExposed>
-    <masterLabel>Signature Image Viewer</masterLabel>
+    <masterLabel>Simple Sign Viewer</masterLabel>
     <description>Displays a saved signature image with date and signer information</description>
     <targets>
         <target>lightning__RecordPage</target>

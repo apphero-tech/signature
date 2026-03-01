@@ -1,76 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
-    <!-- Signature Component Labels -->
     <labels>
-        <fullName>Sig_DrawYourSignature</fullName>
+        <fullName>SimpleSign_DrawYourSignature</fullName>
         <language>en_US</language>
-        <protected>false</protected>
+        <protected>true</protected>
         <shortDescription>Draw Your Signature</shortDescription>
         <value>Draw your signature below</value>
-        <categories>Signature</categories>
+        <categories>SimpleSign</categories>
     </labels>
     <labels>
-        <fullName>Sig_Clear</fullName>
+        <fullName>SimpleSign_Clear</fullName>
         <language>en_US</language>
-        <protected>false</protected>
+        <protected>true</protected>
         <shortDescription>Clear Button</shortDescription>
         <value>Clear</value>
-        <categories>Signature</categories>
+        <categories>SimpleSign</categories>
     </labels>
     <labels>
-        <fullName>Sig_Save</fullName>
+        <fullName>SimpleSign_Save</fullName>
         <language>en_US</language>
-        <protected>false</protected>
+        <protected>true</protected>
         <shortDescription>Save Button</shortDescription>
         <value>Save</value>
-        <categories>Signature</categories>
+        <categories>SimpleSign</categories>
     </labels>
     <labels>
-        <fullName>Sig_LastSignature</fullName>
+        <fullName>SimpleSign_LastSignature</fullName>
         <language>en_US</language>
-        <protected>false</protected>
+        <protected>true</protected>
         <shortDescription>Last Signature Saved</shortDescription>
         <value>Last signature saved</value>
-        <categories>Signature</categories>
+        <categories>SimpleSign</categories>
     </labels>
     <labels>
-        <fullName>Sig_SignedBy</fullName>
+        <fullName>SimpleSign_SignedBy</fullName>
         <language>en_US</language>
-        <protected>false</protected>
+        <protected>true</protected>
         <shortDescription>Signed By</shortDescription>
         <value>by</value>
-        <categories>Signature</categories>
+        <categories>SimpleSign</categories>
     </labels>
     <labels>
-        <fullName>Sig_SaveSuccess</fullName>
+        <fullName>SimpleSign_SaveSuccess</fullName>
         <language>en_US</language>
-        <protected>false</protected>
+        <protected>true</protected>
         <shortDescription>Save Success Message</shortDescription>
         <value>Signature saved successfully!</value>
-        <categories>Signature</categories>
+        <categories>SimpleSign</categories>
     </labels>
     <labels>
-        <fullName>Sig_SaveError</fullName>
+        <fullName>SimpleSign_SaveError</fullName>
         <language>en_US</language>
-        <protected>false</protected>
+        <protected>true</protected>
         <shortDescription>Save Error Message</shortDescription>
         <value>Error saving signature:</value>
-        <categories>Signature</categories>
+        <categories>SimpleSign</categories>
     </labels>
     <labels>
-        <fullName>Sig_SignatureImageAlt</fullName>
+        <fullName>SimpleSign_SignatureImageAlt</fullName>
         <language>en_US</language>
-        <protected>false</protected>
+        <protected>true</protected>
         <shortDescription>Signature Image Alt Text</shortDescription>
         <value>Saved signature image</value>
-        <categories>Signature</categories>
+        <categories>SimpleSign</categories>
     </labels>
     <labels>
-        <fullName>Sig_NoSignatureFound</fullName>
+        <fullName>SimpleSign_NoSignatureFound</fullName>
         <language>en_US</language>
-        <protected>false</protected>
+        <protected>true</protected>
         <shortDescription>No Signature Found</shortDescription>
         <value>No signature image found.</value>
-        <categories>Signature</categories>
+        <categories>SimpleSign</categories>
     </labels>
 </CustomLabels>
