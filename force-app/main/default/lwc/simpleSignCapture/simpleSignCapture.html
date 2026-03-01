@@ -4,6 +4,8 @@
         <canvas
             class="signature-canvas"
             lwc:dom="manual"
+            role="img"
+            aria-label={labels.drawSignature}
             onmousedown={handleMouseDown}
             onmousemove={handleMouseMove}
             onmouseup={handleMouseUp}
@@ -15,8 +17,16 @@
             height="150"
         ></canvas>
         <div class="signature-buttons slds-m-top_small">
-            <button class="signature-btn secondary" onclick={handleClear}>{labels.clear}</button>
-            <button class="signature-btn" onclick={handleSave} disabled={isSaveDisabled}>{labels.save}</button>
+            <lightning-button
+                label={labels.clear}
+                variant="neutral"
+                onclick={handleClear}
+                disabled={isSaving}></lightning-button>
+            <lightning-button
+                label={saveButtonLabel}
+                variant="brand"
+                onclick={handleSave}
+                disabled={isSaveDisabled}></lightning-button>
         </div>
         <template if:true={lastSignature}>
             <div class="slds-card signature-last-card">
