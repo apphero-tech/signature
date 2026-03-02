@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSetGroup xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Simple Sign Users</label>
+    <description>Grants standard access to Simple Sign components and signature records. Assign to all users who need to capture and view electronic signatures.</description>
+    <status>Updated</status>
+    <permissionSets>
+        <permissionSet>SimpleSignUser</permissionSet>
+    </permissionSets>
+</PermissionSetGroup>
