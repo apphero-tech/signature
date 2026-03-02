@@ -3,6 +3,7 @@ node_modules/
 
 # Ignore test output
 test-results/
+coverage/
 *.log
 
 # Ignore old Git folders accidentally copied inside submodules
