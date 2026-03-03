@@ -78,6 +78,10 @@ public with sharing class SimpleSignController {
             throw buildException('Insufficient permissions for the specified lookup field.');
         }
 
+        if (!Schema.sObjectType.Signature__c.fields.SignatureImage__c.isAccessible()) {
+            throw buildException('Insufficient field-level permissions for Signature Image.');
+        }
+
         Id validParentId;
         try {
             validParentId = Id.valueOf(parentRecordId);
