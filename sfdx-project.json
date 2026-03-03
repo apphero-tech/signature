@@ -13,6 +13,7 @@
   "sfdcLoginUrl": "https://login.salesforce.com",
   "sourceApiVersion": "66.0",
   "packageAliases": {
-    "Simple Sign": "0HoON00000000hZ0AQ"
+    "Simple Sign": "0HoON00000000hZ0AQ",
+    "Simple Sign@1.0.0-1": "04tON000000JGibYAG"
   }
 }

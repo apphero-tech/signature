@@ -3,7 +3,5 @@
     <label>Simple Sign Users</label>
     <description>Grants standard access to Simple Sign components and signature records. Assign to all users who need to capture and view electronic signatures.</description>
     <status>Updated</status>
-    <permissionSets>
-        <permissionSet>SimpleSignUser</permissionSet>
-    </permissionSets>
+    <permissionSets>SimpleSignUser</permissionSets>
 </PermissionSetGroup>
