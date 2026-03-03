@@ -12,16 +12,16 @@ export default class SimpleSignSetup extends LightningElement {
         },
         {
             number: '2',
-            title: 'Create Lookup Fields (Optional)',
-            description: 'If you want to link signatures to specific records (Account, Contact, Opportunity, etc.), create a Lookup field on the Signature object.',
-            detail: 'Go to Setup → Object Manager → Signature → Fields & Relationships → New → Lookup Relationship → Select the target object (e.g. Account). Note the field API name (e.g. Account__c) — you will need it in the next steps.',
+            title: 'Create Lookup Fields',
+            description: 'Create a Lookup field on the Signature object to link signatures to specific records (Account, Contact, Opportunity, etc.). You will need the field API name in the next steps.',
+            detail: 'Go to Setup → Object Manager → Signature → Fields & Relationships → New → Lookup Relationship → Select the target object (e.g. Account). Note the field API name (e.g. Account__c).',
             icon: 'utility:linked'
         },
         {
             number: '3',
             title: 'Add Simple Sign Capture to Pages',
-            description: 'Drag the "Simple Sign Capture" component onto any Lightning Record Page, App Page, Home Page, or Screen Flow. Save and Activate the page to make it visible to users.',
-            detail: 'In Lightning App Builder, find "Simple Sign Capture" in the component panel. If you created a lookup field, set the "Lookup Field API Name" property (e.g. Account__c) and the "Parent Record ID" (use {!recordId} in Flows). After saving, click Activate and assign the page as the org default or for specific apps/profiles.',
+            description: 'Drag the "Simple Sign Capture" component onto a Lightning Record Page. Set the "Lookup Field API Name" property to the field you created in Step 2. Save and Activate the page.',
+            detail: 'In Lightning App Builder, find "Simple Sign Capture" in the component panel. Set "Lookup Field API Name" (e.g. Account__c). The parent record is detected automatically. In Screen Flows, also set "Parent Record ID" to {!recordId}. After saving, click Activate and assign the page as the org default or for specific apps/profiles.',
             icon: 'utility:edit'
         },
         {

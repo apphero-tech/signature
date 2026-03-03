@@ -1,11 +1,8 @@
 import { LightningElement, api, wire } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
-import { getRecord, getFieldValue, getFieldDisplayValue } from 'lightning/uiRecordApi';
+import { refreshApex } from '@salesforce/apex';
 import saveSignature from '@salesforce/apex/SimpleSignController.saveSignature';
-
-import SIGNATURE_IMAGE_FIELD from '@salesforce/schema/Signature__c.SignatureImage__c';
-import CREATED_DATE_FIELD from '@salesforce/schema/Signature__c.CreatedDate';
-import CREATED_BY_NAME_FIELD from '@salesforce/schema/Signature__c.CreatedBy.Name';
+import getLatestSignature from '@salesforce/apex/SimpleSignController.getLatestSignature';
 
 import labelDrawSignature from '@salesforce/label/c.SimpleSign_DrawYourSignature';
 import labelClear from '@salesforce/label/c.SimpleSign_Clear';
@@ -44,24 +41,20 @@ export default class SimpleSignCapture extends LightningElement {
     @api parentRecordId;
     @api relatedFieldName;
     lastSignature = null;
+    _wiredSignatureResult;
 
-    @wire(getRecord, {
-        recordId: '$recordId',
-        fields: [SIGNATURE_IMAGE_FIELD, CREATED_DATE_FIELD, CREATED_BY_NAME_FIELD]
+    @wire(getLatestSignature, {
+        relatedFieldName: '$relatedFieldName',
+        parentRecordId: '$effectiveParentRecordId'
     })
-    wiredSignature({ error, data }) {
-        if (data) {
-            const image = getFieldValue(data, SIGNATURE_IMAGE_FIELD);
-            if (image) {
-                this.lastSignature = {
-                    image,
-                    date: getFieldValue(data, CREATED_DATE_FIELD),
-                    name: getFieldDisplayValue(data, CREATED_BY_NAME_FIELD)
-                        || getFieldValue(data, CREATED_BY_NAME_FIELD)
-                };
-            } else {
-                this.lastSignature = null;
-            }
+    wiredLatestSignature(result) {
+        this._wiredSignatureResult = result;
+        if (result.data) {
+            this.lastSignature = {
+                image: result.data.signatureImage,
+                date: result.data.createdDate,
+                name: result.data.createdByName
+            };
         } else {
             this.lastSignature = null;
         }
@@ -201,6 +194,9 @@ export default class SimpleSignCapture extends LightningElement {
             }));
             this.resetDrawing();
             this.signatureValue = dataUrl;
+            if (this._wiredSignatureResult) {
+                refreshApex(this._wiredSignatureResult);
+            }
         } catch (error) {
             this.dispatchEvent(new ShowToastEvent({
                 title: 'Error',

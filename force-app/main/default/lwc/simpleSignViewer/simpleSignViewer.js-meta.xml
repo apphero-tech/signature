@@ -15,8 +15,8 @@
             <property 
                 name="relatedFieldName" 
                 type="String" 
-                label="Lookup Field API Name" 
-                description="API name of the lookup field on Signature__c that points to this object (e.g., Account__c). Leave empty when placed on a Signature__c record page."/>
+                label="Lookup Field API Name (non-Signature pages only)" 
+                description="Set this only when the viewer is placed on a non-Signature record page (e.g., Account, Contact). Use the lookup field API name pointing from Signature to this object (e.g., Account__c). Leave empty on Signature record pages."/>
         </targetConfig>
         <targetConfig targets="lightning__AppPage,lightning__HomePage">
             <property 
