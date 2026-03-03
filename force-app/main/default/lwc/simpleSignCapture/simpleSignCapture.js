@@ -173,6 +173,10 @@ export default class SimpleSignCapture extends LightningElement {
         this.clearCanvas();
     }
 
+    get effectiveParentRecordId() {
+        return this.parentRecordId || this.recordId;
+    }
+
     async handleSave() {
         this.isSaving = true;
         const dataUrl = this.canvas.toDataURL('image/png');
@@ -180,7 +184,7 @@ export default class SimpleSignCapture extends LightningElement {
             const recordId = await saveSignature({
                 base64Image: dataUrl,
                 relatedFieldName: this.relatedFieldName,
-                parentRecordId: this.parentRecordId
+                parentRecordId: this.effectiveParentRecordId
             });
             this.lastSignature = {
                 image: dataUrl,

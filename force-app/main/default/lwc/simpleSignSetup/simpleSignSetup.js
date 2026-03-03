@@ -20,15 +20,15 @@ export default class SimpleSignSetup extends LightningElement {
         {
             number: '3',
             title: 'Add Simple Sign Capture to Pages',
-            description: 'Drag the "Simple Sign Capture" component onto any Lightning Record Page, App Page, Home Page, or Screen Flow.',
-            detail: 'In Lightning App Builder, find "Simple Sign Capture" in the component panel. If you created a lookup field, set the "Lookup Field API Name" property (e.g. Account__c) and the "Parent Record ID" (use {!recordId} in Flows).',
+            description: 'Drag the "Simple Sign Capture" component onto any Lightning Record Page, App Page, Home Page, or Screen Flow. Save and Activate the page to make it visible to users.',
+            detail: 'In Lightning App Builder, find "Simple Sign Capture" in the component panel. If you created a lookup field, set the "Lookup Field API Name" property (e.g. Account__c) and the "Parent Record ID" (use {!recordId} in Flows). After saving, click Activate and assign the page as the org default or for specific apps/profiles.',
             icon: 'utility:edit'
         },
         {
             number: '4',
             title: 'Add Simple Sign Viewer to Pages',
-            description: 'Drag the "Simple Sign Viewer" component to display saved signatures.',
-            detail: 'On a Signature record page: no configuration needed. On other record pages (Account, Contact, etc.): set the "Lookup Field API Name" property to the field you created in Step 2.',
+            description: 'Drag the "Simple Sign Viewer" component to display saved signatures. Save and Activate the page.',
+            detail: 'On a Signature record page: no configuration needed. On other record pages (Account, Contact, etc.): set the "Lookup Field API Name" property to the field you created in Step 2. Remember to Activate the page after saving.',
             icon: 'utility:preview'
         },
         {
