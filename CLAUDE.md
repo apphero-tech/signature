@@ -34,6 +34,6 @@
 
 ## Docs
 
-- `docs/APPEXCHANGE_LISTING.md` — Full AppExchange submission guide (title, tagline, description, pricing, screenshots, checklist)
+- `docs/listing/APPEXCHANGE_LISTING.md` — Full AppExchange submission guide (title, tagline, description, pricing, screenshots, checklist)
 - `docs/BUSINESS_DOCUMENT_PROMPT.md` — AI documentation generation prompt
 - `docs/RELEASE_NOTES_PROMPT.md` — Release notes generation prompt

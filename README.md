@@ -123,6 +123,15 @@ To add additional languages, create translation files in the `translations/` dir
 | Created Date | `CreatedDate` | DateTime | When signature was captured |
 | Created By | `CreatedById` | Lookup(User) | Who captured the signature |
 
+## Documentation
+
+| Document | Purpose |
+|----------|---------|
+| [docs/listing/](docs/listing/) | AppExchange Listing — marketing, screenshots, description, pricing, checklist |
+| [docs/security-review/](docs/security-review/) | Security Review — architecture, API callouts, scanner reports |
+| [docs/BUSINESS_DOCUMENT_PROMPT.md](docs/BUSINESS_DOCUMENT_PROMPT.md) | Business doc source (AI tools) |
+| [docs/RELEASE_NOTES_PROMPT.md](docs/RELEASE_NOTES_PROMPT.md) | Release notes generation prompt |
+
 ## Development
 
 ### Prerequisites

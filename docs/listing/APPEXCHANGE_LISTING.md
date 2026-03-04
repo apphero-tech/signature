@@ -291,11 +291,160 @@ Conçu comme un Lightning Web Component natif, Simple Sign fonctionne partout : 
 
 ---
 
-## 11. Checklist de soumission AppExchange
+## 11. Technical Details (Security Review / Listing Builder)
+
+> Texte prêt à copier dans le formulaire "Add Technical Details" de la Partner Console.
+
+### Describe Your Solution
+
+```
+Simple Sign is a 100% native Salesforce managed package that provides electronic signature capture and display. It consists of:
+
+- Lightning Web Components (LWC): simpleSignCapture (signature pad with HTML5 Canvas), simpleSignViewer (read-only display), simpleSignSetup (post-installation wizard)
+- Apex controller (SimpleSignController) with two @AuraEnabled methods: saveSignature (persists base64 PNG to custom object) and getLatestSignature (retrieves signature for display)
+- Custom object Signature__c with auto-number (SIG-xxxx), long text field for base64 image, and configurable lookup to link signatures to any object
+- Two permission sets: SimpleSignUser (standard CRUD) and SimpleSignAdmin (full access)
+- Custom labels for UI strings (English and French)
+
+The solution runs entirely within the Salesforce Platform. No external services, API callouts, or third-party integrations. Signatures are stored as base64 text in the custom object — no Salesforce file storage consumed.
+
+Documentation: [GitHub repo / Wiki URL — à compléter]
+```
+
+### Web app or service — frameworks and languages
+
+**Toggle: Disabled** (Simple Sign does not include a web app or external service. It runs entirely on the Salesforce Platform.)
+
+---
+
+### Platforms other than Salesforce Platform
+
+**Toggle: Disabled** (No Heroku, Marketing Cloud, or other platforms used.)
+
+---
+
+### Integration with technology outside Salesforce Platform
+
+**Toggle: Disabled** (No external integrations. The solution is 100% native to Salesforce.)
+
+---
+
+### API-only app
+
+**Toggle: Disabled** (Simple Sign is a Lightning Component app with a visual UI, not API-only.)
+
+---
+
+### Salesforce Platform technology (Lightning Components, Apex)
+
+```
+- Lightning Web Components (LWC): Three components built with the standard LWC framework. Uses lightning-record-edit-form concepts via imperative Apex calls. Targets: lightning__RecordPage, lightning__AppPage, lightning__HomePage, lightning__FlowScreen, lightningCommunity__Page.
+
+- Apex: Single controller class (SimpleSignController) with "with sharing", CRUD/FLS checks on all operations, parameterized SOQL (String.escapeSingleQuotes for dynamic field names), AuraHandledException for user-facing errors. No SOSL, no callouts, no scheduled jobs, no triggers.
+```
+
+### OAuth or access tokens storage
+
+**Toggle: Disabled** (No OAuth tokens or access tokens are stored. The solution does not authenticate with external systems.)
+
+---
+
+### Data stored outside Salesforce Platform
+
+**Toggle: Disabled** (All data (signatures as base64 PNG text) is stored exclusively in the Signature__c custom object within the subscriber's Salesforce org. No data leaves the platform.)
+
+---
+
+### Japanese text
+
+**Toggle: Disabled** (No Japanese text in components.)
+
+---
+
+### Mobile App
+
+**Enabled** — Enter:
+
+```
+Simple Sign is available within the Salesforce Mobile App (iOS and Android) when the signature capture or viewer component is placed on Lightning pages that are accessible in the mobile app. The signature pad uses an HTML5 Canvas with touch support, so users can draw signatures with their finger on mobile devices. No standalone native mobile app — the solution runs inside the Salesforce Mobile App container.
+```
+
+### Mobile devices / operating systems
+
+```
+iOS and Android — via the official Salesforce Mobile App. Tested on recent versions of both operating systems.
+```
+
+### Browser extension
+
+**Toggle: Disabled** (No browser extension.)
+
+---
+
+### Desktop or client app
+
+**Toggle: Disabled** (No desktop or client app. Users interact via Lightning Experience in a web browser or via the Salesforce Mobile App.)
+
+---
+
+## 12. Security Review — Documents requis
+
+> Documents à uploader dans la Partner Console pour la Security Review.
+
+### Solution Architecture and Usage (obligatoire)
+
+**Document** : [docs/security-review/SOLUTION_ARCHITECTURE.md](../security-review/SOLUTION_ARCHITECTURE.md)  
+**Contenu** : Flux d'information, authentification (session Salesforce uniquement), chiffrement (TLS/HTTPS), points de contact des données, instructions d'utilisation de base.  
+**Action** : Exporter en PDF et uploader sur la Partner Console.
+
+### Sample API Callouts (obligatoire)
+
+**Document** : [docs/security-review/NO_API_CALLOUTS.md](../security-review/NO_API_CALLOUTS.md)  
+**Contenu** : Simple Sign n'effectue aucune requête HTTP externe. Aucun sample request/response à fournir.  
+**Action** : Exporter en PDF et uploader.
+
+### Security Scanner Reports (obligatoire)
+
+**Source Scanner** (package Salesforce) :  
+- Aller sur [Partner Security Portal](https://partners.salesforce.com) → Security → Source Scanner  
+- Soumettre le package version (04t…)  
+- Télécharger le rapport **clean** (0 vulnérabilités critiques/hautes) et l'uploader  
+
+Si le rapport contient des faux positifs : utiliser le template False Positives et expliquer chaque point. Sinon, cocher : **"I confirm that there are no false positives in my security scanner reports."**
+
+### Salesforce Code Analyzer (obligatoire)
+
+**Rapport généré** : [docs/security-review/security-report-code-analyzer.html](../security-review/security-report-code-analyzer.html)  
+- **pmd-appexchange** : 0 violations (clean)  
+- **eslint-lwc** : violations de style/suggestion (sort-imports, magic numbers, etc.). Quelques "problem" (no-api-reassignments, no-async-await) — optionnel de corriger avant soumission.  
+
+Pour régénérer ou corriger avant soumission :
+
+```bash
+sf scanner run --target "force-app" -e pmd-appexchange -e eslint-lwc -e retire-js --format html --outfile docs/security-review/security-report-code-analyzer.html
+```
+
+- Le ruleset **pmd-appexchange** (sécurité AppExchange) est clean.  
+- Uploader le rapport HTML. Si des violations eslint restent, les reviewers peuvent les accepter si ce ne sont que des suggestions ; corriger les "problem" si possible.  
+
+Si vous n'utilisez pas Code Analyzer : cocher **"I didn't use Salesforce Code Analyzer"** et expliquer pourquoi.
+
+### Agentforce Questionnaire
+
+**Non applicable** — Simple Sign ne contient pas d'éléments Agentforce (actions, topics, templates, LLMs). Aucun questionnaire à soumettre.
+
+### Other Documents (optionnel)
+
+- Documentation additionnelle si demandée par les reviewers  
+- Release notes, architecture détaillée, etc.
+
+---
+
+## 13. Checklist de soumission AppExchange
 
 ### Pré-soumission
 
-- [ ] Security Review passée (Checkmarx scan, manual review)
+- [ ] Security Review passée (Source Scanner + Code Analyzer clean)
 - [ ] Package version promoted (`sf package version promote`)
 - [ ] Tests Apex avec couverture > 75% (actuellement : ~95%)
 - [ ] Aucun code en dur (hardcoded IDs, URLs, credentials)
@@ -339,7 +488,7 @@ Conçu comme un Lightning Web Component natif, Simple Sign fonctionne partout : 
 
 ---
 
-## 12. Growth Strategy (post-lancement)
+## 14. Growth Strategy (post-lancement)
 
 ### Quick wins pour les 90 premiers jours
 
