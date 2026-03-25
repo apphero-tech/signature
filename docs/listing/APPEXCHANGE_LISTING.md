@@ -15,8 +15,8 @@
 | **Package ID** | `0HoON00000000hZ0AQ` |
 | **Namespace** | `aph` |
 | **API Version** | 66.0 |
-| **Version Name** | Spring '26 |
-| **Version Number** | 1.0.0 |
+| **Version Name** | Spring '26 Patch 3 |
+| **Version Number** | 1.3.0 |
 
 ---
 
@@ -387,56 +387,28 @@ iOS and Android — via the official Salesforce Mobile App. Tested on recent ver
 
 ---
 
-## 12. Security Review — Documents requis
+## 12. Security Review — 4 écrans Partner Console
 
-> Documents à uploader dans la Partner Console pour la Security Review.
+> Guide complet : [docs/security-review/SECURITY_REVIEW_GUIDE.md](../security-review/SECURITY_REVIEW_GUIDE.md)
 
-### Solution Architecture and Usage (obligatoire)
+| Écran | Contenu |
+|-------|---------|
+| **1. Linked Solution** | Simple Sign, Spring '26 Patch 3 (v1.3.0) |
+| **2. Technical Details** | Formulaire — contenu à copier dans [section 11](#11-technical-details-security-review--listing-builder) ci-dessus |
+| **3. Upload Documentation** | Solution Architecture, API Callouts, Source Scanner, False Positives, Code Analyzer, Agentforce, Other |
+| **4. Review & Submit** | Vérification finale et soumission |
 
-**Document** : [docs/security-review/SOLUTION_ARCHITECTURE.md](../security-review/SOLUTION_ARCHITECTURE.md)  
-**Contenu** : Flux d'information, authentification (session Salesforce uniquement), chiffrement (TLS/HTTPS), points de contact des données, instructions d'utilisation de base.  
-**Action** : Exporter en PDF et uploader sur la Partner Console.
+**Écran 3 — Documents à uploader :**
 
-### Sample API Callouts (obligatoire)
-
-**Document** : [docs/security-review/NO_API_CALLOUTS.md](../security-review/NO_API_CALLOUTS.md)  
-**Contenu** : Simple Sign n'effectue aucune requête HTTP externe. Aucun sample request/response à fournir.  
-**Action** : Exporter en PDF et uploader.
-
-### Security Scanner Reports (obligatoire)
-
-**Source Scanner** (package Salesforce) :  
-- Aller sur [Partner Security Portal](https://partners.salesforce.com) → Security → Source Scanner  
-- Soumettre le package version (04t…)  
-- Télécharger le rapport **clean** (0 vulnérabilités critiques/hautes) et l'uploader  
-
-Si le rapport contient des faux positifs : utiliser le template False Positives et expliquer chaque point. Sinon, cocher : **"I confirm that there are no false positives in my security scanner reports."**
-
-### Salesforce Code Analyzer (obligatoire)
-
-**Rapport généré** : [docs/security-review/security-report-code-analyzer.html](../security-review/security-report-code-analyzer.html)  
-- **pmd-appexchange** : 0 violations (clean)  
-- **eslint-lwc** : violations de style/suggestion (sort-imports, magic numbers, etc.). Quelques "problem" (no-api-reassignments, no-async-await) — optionnel de corriger avant soumission.  
-
-Pour régénérer ou corriger avant soumission :
-
-```bash
-sf scanner run --target "force-app" -e pmd-appexchange -e eslint-lwc -e retire-js --format html --outfile docs/security-review/security-report-code-analyzer.html
-```
-
-- Le ruleset **pmd-appexchange** (sécurité AppExchange) est clean.  
-- Uploader le rapport HTML. Si des violations eslint restent, les reviewers peuvent les accepter si ce ne sont que des suggestions ; corriger les "problem" si possible.  
-
-Si vous n'utilisez pas Code Analyzer : cocher **"I didn't use Salesforce Code Analyzer"** et expliquer pourquoi.
-
-### Agentforce Questionnaire
-
-**Non applicable** — Simple Sign ne contient pas d'éléments Agentforce (actions, topics, templates, LLMs). Aucun questionnaire à soumettre.
-
-### Other Documents (optionnel)
-
-- Documentation additionnelle si demandée par les reviewers  
-- Release notes, architecture détaillée, etc.
+| Champ | Fichier / Source |
+|-------|------------------|
+| Solution Architecture and Usage | [SOLUTION_ARCHITECTURE.md](../security-review/SOLUTION_ARCHITECTURE.md) → PDF |
+| Sample API Callouts | [NO_API_CALLOUTS.md](../security-review/NO_API_CALLOUTS.md) → PDF |
+| Security Scanner Reports | Partner Portal → Source Scanner → rapport clean |
+| False Positives | Case à cocher si clean ; sinon template |
+| Salesforce Code Analyzer | [security-report-code-analyzer.html](../security-review/security-report-code-analyzer.html) |
+| Agentforce Questionnaire | Non applicable |
+| Other Documents | Optionnel |
 
 ---
 

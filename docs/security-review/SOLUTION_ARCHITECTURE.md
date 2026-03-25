@@ -109,7 +109,7 @@ flowchart TB
 
 ## 6. Security Controls
 
-- **CRUD/FLS**: All Apex operations check `isCreateable()`, `isAccessible()` before DML/SOQL.
+- **CRUD/FLS**: All DML uses `AccessLevel.USER_MODE` (platform-enforced CRUD/FLS). All SOQL uses `AccessLevel.USER_MODE` (platform-enforced object and field accessibility).
 - **Sharing**: `with sharing` ensures row-level security.
 - **Input validation**: Parent ID format (`Id.valueOf`), lookup field existence and type, base64 format prefix.
 - **SOQL injection**: Dynamic field names use `String.escapeSingleQuotes()`.

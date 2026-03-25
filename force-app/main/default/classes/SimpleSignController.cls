@@ -12,15 +12,8 @@ public with sharing class SimpleSignController {
             throw buildException('Invalid signature image format.');
         }
 
-        if (!Schema.sObjectType.Signature__c.isCreateable()) {
-            throw buildException('Insufficient permissions to create Signature records.');
-        }
-
-        if (!Schema.sObjectType.Signature__c.fields.SignatureImage__c.isCreateable()) {
-            throw buildException('Insufficient field-level permissions for Signature Image.');
-        }
-
-        Signature__c sig = new Signature__c(SignatureImage__c = base64Image);
+        Signature__c sig = new Signature__c();
+        sig.put('SignatureImage__c', base64Image);
 
         if (String.isNotBlank(relatedFieldName) && String.isNotBlank(parentRecordId)) {
             Schema.SObjectField field = Schema.sObjectType.Signature__c.fields.getMap().get(relatedFieldName);
@@ -33,10 +26,6 @@ public with sharing class SimpleSignController {
                 throw buildException('The specified field must be a lookup or master-detail relationship.');
             }
 
-            if (!fieldDescribe.isCreateable()) {
-                throw buildException('Insufficient permissions for the specified lookup field.');
-            }
-
             try {
                 Id validParentId = Id.valueOf(parentRecordId);
                 sig.put(relatedFieldName, validParentId);
@@ -46,7 +35,9 @@ public with sharing class SimpleSignController {
         }
 
         try {
-            insert sig;
+            Database.insert(sig, AccessLevel.USER_MODE);
+        } catch (SecurityException e) {
+            throw buildException('Insufficient permissions to create Signature records.');
         } catch (DmlException e) {
             throw buildException(e.getDmlMessage(0));
         }
@@ -60,10 +51,6 @@ public with sharing class SimpleSignController {
             return null;
         }
 
-        if (!Schema.sObjectType.Signature__c.isAccessible()) {
-            throw buildException('Insufficient permissions to read Signature records.');
-        }
-
         Schema.SObjectField field = Schema.sObjectType.Signature__c.fields.getMap().get(relatedFieldName);
         if (field == null) {
             throw buildException('The specified lookup field does not exist on the Signature object.');
@@ -72,14 +59,6 @@ public with sharing class SimpleSignController {
         Schema.DescribeFieldResult fieldDescribe = field.getDescribe();
         if (fieldDescribe.getType() != Schema.DisplayType.REFERENCE) {
             throw buildException('The specified field must be a lookup or master-detail relationship.');
-        }
-
-        if (!fieldDescribe.isAccessible()) {
-            throw buildException('Insufficient permissions for the specified lookup field.');
-        }
-
-        if (!Schema.sObjectType.Signature__c.fields.SignatureImage__c.isAccessible()) {
-            throw buildException('Insufficient field-level permissions for Signature Image.');
         }
 
         Id validParentId;
@@ -95,7 +74,12 @@ public with sharing class SimpleSignController {
             + ' ORDER BY CreatedDate DESC, Id DESC'
             + ' LIMIT 1';
 
-        List<Signature__c> results = Database.query(query);
+        List<Signature__c> results;
+        try {
+            results = Database.query(query, AccessLevel.USER_MODE);
+        } catch (Exception e) {
+            throw buildException('Insufficient permissions to read Signature records.');
+        }
         if (results.isEmpty()) {
             return null;
         }

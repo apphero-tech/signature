@@ -4,8 +4,8 @@
       "path": "force-app",
       "default": true,
       "package": "Simple Sign",
-      "versionName": "Spring '26",
-      "versionNumber": "1.0.0.NEXT",
+      "versionName": "Spring '26 Patch 3",
+      "versionNumber": "1.3.0.NEXT",
       "versionDescription": "Electronic signature capture component for Salesforce Lightning. Supports Screen Flows, Record Pages, App Pages, Home Pages, and Experience Cloud."
     }
   ],
@@ -17,6 +17,10 @@
     "Simple Sign@1.0.0-1": "04tON000000JGibYAG",
     "Simple Sign@1.0.0-2": "04tON000000JGsHYAW",
     "Simple Sign@1.0.0-3": "04tON000000JGttYAG",
-    "Simple Sign@1.0.0-4": "04tON000000JGvVYAW"
+    "Simple Sign@1.0.0-4": "04tON000000JGvVYAW",
+    "Simple Sign@1.1.0-1": "04tON000000JJF3YAO",
+    "Simple Sign@1.1.0-2": "04tON000000JJGfYAO",
+    "Simple Sign@1.2.0-1": "04tON000000JJOjYAO",
+    "Simple Sign@1.3.0-1": "04tON000000JJWnYAO"
   }
 }
